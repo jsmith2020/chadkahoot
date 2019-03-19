@@ -1,10 +1,12 @@
 import pygame, sys, time, random
 from pygame.locals import *
-
 pygame.init()
 
 DISPLAYSURF = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("KAHOOT")
+
+FPS = 50
+fpsClock = pygame.time.Clock()
 
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -13,7 +15,16 @@ YELLOW = (255, 255, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-colors = []
+def ask_question(color):
+    frametime = 0
+    if frametime <= 1000:
+        frametime = frametime + 1
+        if category.check_answer(color):
+            return 1000 - frametime
+        else:
+            return 0
+    else:
+        return 0
 
 def draw_shapes():
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 0, 800, 300))
