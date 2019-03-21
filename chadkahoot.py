@@ -5,6 +5,9 @@ pygame.init()
 DISPLAYSURF = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("KAHOOT")
 
+pygame.mixer.music.load('kahootmusic.mp3')
+pygame.mixer.music.play(-1, 0.0)
+
 FPS = 50
 fpsClock = pygame.time.Clock()
 
@@ -14,11 +17,13 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+UGLY = (250, 0, 150)
 
 def ask_question(color):
     frametime = 0
     if frametime <= 1000:
         frametime = frametime + 1
+        pygame.draw.line(DISPLAYSURF, UGLY, (0, 50), (frametime, 50), 15)
         if category.check_answer(color):
             return 1000 - frametime
         else:
@@ -56,14 +61,13 @@ click = (-1, -1)
 color = False
 while True:
     for event in pygame.event.get():
-
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
-
-        if event.type == MOUSEBUTTONDOWN:
-            click = pygame.mouse.get_pos()
-            color = assign_color(click)
+        while num <= 8:
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == MOUSEBUTTONDOWN:
+                click = pygame.mouse.get_pos()
+                color = assign_color(click)
 
     draw_shapes()
     pygame.display.update()
