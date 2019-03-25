@@ -93,6 +93,18 @@ def ask_question(color):
     else:
         return 0
 
+def call_questions():
+    global game_question1 = question(["Epic Games, Ubisoft, Mojang, Supercell"],"What studio created Fortnite?")
+    global game_question2 = question(["Wailord, Pinkachu, Charzard, Calvin"], "Who is the biggest Pokemon?")
+    global game_question3 = question(["Infinite Warfare, Fallout 76, Sim City 2013, Casey Powell Lacrosse 16"], "What video game trailer received the most amounts of dislikes on YouTube?")
+    global game_question4 = question(["5 Minutes 58 Seconds, 4 minutes 3 seconds, 2 minutes 23 seconds, 7 minutes 49 seconds"], "What is the world record time for beating Super Mario Bros?")
+    global game_question5 = question(["2013, 2012, 2014, 2011"], "When was the PS4 released?")
+    global game_question6 = question(["2013, 2012, 2015, 2014"], "When was GTA V released?")
+    global game_question7 = question(["2013, 2011, 2012, 2014"], "When was FIFA 14 released?")
+    global game_question8 = question(["2012, 2013, 2011, 2014"], "When was CS:GO released?")
+    global history_question1 = question(["1933, 1929, 1941, 1935"], "When did Hitler take power?")
+    global history_question2 = question(["Mussolini, SpaghettMan, King Alfonso X, The Pope"], "Who was the leader of Italy during WW2?")
+    
 def draw_shapes():
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 0, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
