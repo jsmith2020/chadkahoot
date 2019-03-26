@@ -81,7 +81,7 @@ def load_images():
     global world_cup_image
     world_cup_image = pygame.image.load('world_cup.jpg')
 
-def ask_question(color):
+def ask_question(color, category):
     frametime = 0
     if frametime <= 1000:
         frametime = frametime + 1
@@ -121,15 +121,21 @@ def assign_color(click):
 
 click = (-1, -1)
 color = False
+total_score = 0
 while True:
     for event in pygame.event.get():
-        while num <= 8:
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == MOUSEBUTTONDOWN:
-                click = pygame.mouse.get_pos()
-                color = assign_color(click)
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == MOUSEBUTTONDOWN:
+            click = pygame.mouse.get_pos()
+            color = assign_color(click)
+            answered = True
+
+    category = None
+    total_score += ask_question(color, category)
+    category.new_question()
 
     draw_shapes()
+    category.display_text()
     pygame.display.update()
