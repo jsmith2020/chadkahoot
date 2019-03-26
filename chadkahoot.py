@@ -33,7 +33,8 @@ def load_images():
     global spaghet_image
     spaghet_image = pygame.image.load('spaghet.jpg')
     global ali_a_image
-    ali_a_image = pygame.image.load('ali-a.png')
+    ali_a_image = pygame.image.load
+    ('ali-a.png')
     global johnny_image
     johnny_image = pygame.image.load('johnny.jiff')
     global fortnite_image
@@ -57,8 +58,7 @@ def load_images():
     global mussolini_image
     mussolini_image = pygame.image.load('mussolini.jpg')
     global WWII_image
-    WWII_image = pygame.image.load('WWII.jpg')
-    global battle_of_the_bulge_image
+    WWII_image = pygame.image.load('WWII.jpg')    global battle_of_the_bulge_image
     battle_of_the_bulge_image = pygame.image.load('battle_of_the_bulge.jpg')
     global invasion_of_china_image
     invasion_of_china_image = pygame.image.load('invasion_of_china.jpg')
@@ -93,7 +93,42 @@ def ask_question(color, category):
     else:
         return 0
 
-def draw_shapes():
+def call_questions():
+    global game_question1 = question(["Epic Games, Ubisoft, Mojang, Supercell"],"What studio created Fortnite?")
+    global game_question2 = question(["Wailord, Pinkachu, Charzard, Calvin"], "Who is the biggest Pokemon?")
+    global game_question3 = question(["Infinite Warfare, Fallout 76, Sim City 2013, Casey Powell Lacrosse 16"], "What video game trailer received the most amounts of dislikes on YouTube?")
+    global game_question4 = question(["5 Minutes 58 Seconds, 4 minutes 3 seconds, 2 minutes 23 seconds, 7 minutes 49 seconds"], "What is the world record time for beating Super Mario Bros?")
+    global game_question5 = question(["2013, 2012, 2014, 2011"], "When was the PS4 released?")
+    global game_question6 = question(["2013, 2012, 2015, 2014"], "When was GTA V released?")
+    global game_question7 = question(["2013, 2011, 2012, 2014"], "When was FIFA 14 released?")
+    global game_question8 = question(["2012, 2013, 2011, 2014"], "When was CS:GO released?")
+    global history_question1 = question(["1933, 1929, 1941, 1935"], "When did Hitler take power?")
+    global history_question2 = question(["Mussolini, SpaghettMan, King Alfonso X, The Pope"], "Who was the leader of Italy during WW2?")
+    global history_question3 = question(["1939, 1940, 1938, 1941"], "In what year did WW2 start?")
+    global history_question4 = question(["Belgium, Netherlands, Koenburg, France"], "In what country was the battle of the bulge fought?")
+    global history_question5 = question(["6 million, 600 thousand, 28 million, 1.2 million"], "How many people died in the invasion of china?")
+    global history_question6 = question(["Nagasaki & Hiroshima, Tokyo and Okinawa, Iwo Jima and Hiroshima, Osaka and Nagasaki"], "In what Japanese cities were the first atomic bombs dropped?")
+    global history_question7 = question(["Battle of the Atlantic, Battle of the Bulge, Battle of France, The Battle of the Bagel"], "What was the longest battle of WW2?")
+    global history_question8 = question(["Dachau, Danzig, Auschwitz, Lodz"], "What was the first Nazi concentration camp?")
+
+    meme_question1 = Question(["karen, the zucc, big chungus,koen"],"Who took the kids?",)
+    meme_question2 = Question(["ninja, guy fieri, jeff bezos, mario"], "What internet personality died of Ligma?")
+    meme_question3 = Question(["The Zucc Bot, Thomas,Johnny-Johnny,Patrick Star, Kazoo Kid"], "What internet person is a lizard?")
+    meme_question4 = Question(["Knuckes, Motomoto, obiwan kanobi, Ali-A"], "What is the only noteable thing from Uganda?")
+    meme_question5 = Question(["Spaghget, My soul, The magic school bus, Harry Truman"], "What did somebody ah-touch?")
+    meme_question6 = Question(["Harambe, Gekyume, Jah, Thanos"], "Who forever lives in our hearts?")
+    meme_question7 = Question(["Ali-A, Pewdiepie,Thomas Hudson, Mr. Kantaros"],"Who has a intro that will make your eardrums bleed")
+    meme_question8 = Question(["Sugar, pancakes,Brown Sugar, Bread"], "What is Johnny-Johnny Eating?")
+
+    sport_question1 = Question(["Yankees-27, Twins-13, Mets-15, Astros-4"], "What baseball team has the most world series wins?")
+    sport_question2 = Question(["American Pharo, Zues,Thomas Hudson, African King"], "What was the last horse to win a triple crown?")
+    sport_question3 = Question(["David Robinson, Michael Jordan, John Stockton, Jebron James"], "What NBA player was names 'the admiral'")
+    sport_question4 = Question(["Antoine Walker, Allen Iverson, Shaq, Steph Curry"], "What player was on the cover of NBA 2K 99")
+    sport_question5 = Question(["2500 mi, 1,500 mi, 2000 mi, 1000 mi"], "How long in the Tour De France?")
+    sport_question6 = Question(["Jai alai, ping pong, cricket, baseball"], "What sport is this?")
+    sport_question7 = Question(["Brazil, Argentina, Spain, Portugal"], "What is the only country to play in every world cup?")
+    sport_question8 = Question(["Karren Abdul-Jabar, Michael Jordan, Kobe Bryant, Lebron James"],"Who is the all-time leading scorer in the NBA?"
+def draw_shapes
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 0, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
     pygame.draw.rect(DISPLAYSURF, RED, (400, 300, 400, 150))
@@ -139,3 +174,22 @@ while True:
     draw_shapes()
     category.display_text()
     pygame.display.update()
+
+
+    meme_question1 = Question(["karen, the zucc, big chungus,koen"],"Who took the kids?",)
+    meme_question2 = Question(["ninja, guy fieri, jeff bezos, mario"], "What internet personality died of Ligma?")
+    meme_question3 = Question(["The Zucc Bot, Thomas,Johnny-Johnny,Patrick Star, Kazoo Kid"], "What internet person is a lizard?")
+    meme_question4 = Question(["Knuckes, Motomoto, obiwan kanobi, Ali-A"], "What is the only noteable thing from Uganda?")
+    meme_question5 = Question(["Spaghget, My soul, The magic school bus, Harry Truman"], "What did somebody ah-touch?")
+    meme_question6 = Question(["Harambe, Gekyume, Jah, Thanos"], "Who forever lives in our hearts?")
+    meme_question7 = Question(["Ali-A, Pewdiepie,Thomas Hudson, Mr. Kantaros"],"Who has a intro that will make your eardrums bleed")
+    meme_question8 = Question(["Sugar, pancakes,Brown Sugar, Bread"], "What is Johnny-Johnny Eating?")
+
+    sport_question1 = Question(["Yankees-27, Twins-13, Mets-15, Astros-4"], "What baseball team has the most world series wins?")
+    sport_question2 = Question(["American Pharo, Zues,Thomas Hudson, African King"], "What was the last horse to win a triple crown?")
+    sport_question3 = Question(["David Robinson, Michael Jordan, John Stockton, Jebron James"], "What NBA player was names 'the admiral'")
+    sport_question4 = Question(["Antoine Walker, Allen Iverson, Shaq, Steph Curry"], "What player was on the cover of NBA 2K 99")
+    sport_question5 = Question(["2500 mi, 1,500 mi, 2000 mi, 1000 mi"], "How long in the Tour De France?")
+    sport_question6 = Question(["Jai alai, ping pong, cricket, baseball"], "What sport is this?")
+    sport_question7 = Question(["Brazil, Argentina, Spain, Portugal"], "What is the only country to play in every world cup?")
+    sport_question8 = Question(["Karren Abdul-Jabar, Michael Jordan, Kobe Bryant, Lebron James"],"Who is the all-time leading scorer in the NBA?"
