@@ -104,7 +104,12 @@ def call_questions():
     global game_question8 = question(["2012, 2013, 2011, 2014"], "When was CS:GO released?")
     global history_question1 = question(["1933, 1929, 1941, 1935"], "When did Hitler take power?")
     global history_question2 = question(["Mussolini, SpaghettMan, King Alfonso X, The Pope"], "Who was the leader of Italy during WW2?")
-    
+    global history_question3 = question(["1939, 1940, 1938, 1941"], "In what year did WW2 start?")
+    global history_question4 = question(["Belgium, Netherlands, Koenburg, France"], "In what country was the battle of the bulge fought?")
+    global history_question5 = question(["6 million, 600 thousand, 28 million, 1.2 million"], "How many people died in the invasion of china?")
+    global history_question6 = question(["Nagasaki & Hiroshima, Tokyo and Okinawa, Iwo Jima and Hiroshima, Osaka and Nagasaki"], "In what Japanese cities were the first atomic bombs dropped?")
+    global history_question7 = question(["Battle of the Atlantic, Battle of the Bulge, Battle of France, The Battle of the Bagel"], "What was the longest battle of WW2?")
+    global history_question8 = question(["Dachau, Danzig, Auschwitz, Lodz"], "What was the first Nazi concentration camp?")
 def draw_shapes():
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 0, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
