@@ -93,6 +93,23 @@ def ask_question(color):
     else:
         return 0
 
+def call_questions():
+    global game_question1 = question(["Epic Games, Ubisoft, Mojang, Supercell"],"What studio created Fortnite?")
+    global game_question2 = question(["Wailord, Pinkachu, Charzard, Calvin"], "Who is the biggest Pokemon?")
+    global game_question3 = question(["Infinite Warfare, Fallout 76, Sim City 2013, Casey Powell Lacrosse 16"], "What video game trailer received the most amounts of dislikes on YouTube?")
+    global game_question4 = question(["5 Minutes 58 Seconds, 4 minutes 3 seconds, 2 minutes 23 seconds, 7 minutes 49 seconds"], "What is the world record time for beating Super Mario Bros?")
+    global game_question5 = question(["2013, 2012, 2014, 2011"], "When was the PS4 released?")
+    global game_question6 = question(["2013, 2012, 2015, 2014"], "When was GTA V released?")
+    global game_question7 = question(["2013, 2011, 2012, 2014"], "When was FIFA 14 released?")
+    global game_question8 = question(["2012, 2013, 2011, 2014"], "When was CS:GO released?")
+    global history_question1 = question(["1933, 1929, 1941, 1935"], "When did Hitler take power?")
+    global history_question2 = question(["Mussolini, SpaghettMan, King Alfonso X, The Pope"], "Who was the leader of Italy during WW2?")
+    global history_question3 = question(["1939, 1940, 1938, 1941"], "In what year did WW2 start?")
+    global history_question4 = question(["Belgium, Netherlands, Koenburg, France"], "In what country was the battle of the bulge fought?")
+    global history_question5 = question(["6 million, 600 thousand, 28 million, 1.2 million"], "How many people died in the invasion of china?")
+    global history_question6 = question(["Nagasaki & Hiroshima, Tokyo and Okinawa, Iwo Jima and Hiroshima, Osaka and Nagasaki"], "In what Japanese cities were the first atomic bombs dropped?")
+    global history_question7 = question(["Battle of the Atlantic, Battle of the Bulge, Battle of France, The Battle of the Bagel"], "What was the longest battle of WW2?")
+    global history_question8 = question(["Dachau, Danzig, Auschwitz, Lodz"], "What was the first Nazi concentration camp?")
 def draw_shapes():
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 0, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
