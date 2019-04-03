@@ -86,16 +86,19 @@ def load_images():
     global atomic_image
     atomic_image = pygame.image.load('images/atomic_bomb.jpg')
 
-def ask_question(color, category):
-    frametime = 0
+def ask_question(color, category, frametime):
     if frametime <= 1000:
-        frametime = frametime + 1
-        pygame.draw.line(DISPLAYSURF, UGLY, (0, 50), (frametime, 50), 15)
-        if category.check_answer(color):
-            return 1000 - frametime
+        pygame.draw.line(DISPLAYSURF, WHITE, (1000, 0), (1000 - frametime, 0), 30)
+        if color > 0:
+            if category.check_answer(color):
+                return 1000 - frametime
+            else:
+                return 0
         else:
-            return 0
+            return -1
     else:
+        global answered
+        answered = True
         return 0
 
 def call_questions():
@@ -145,7 +148,7 @@ def call_questions():
     games = Category([game_question1, game_question2, game_question3, game_question4, game_question5, game_question6, game_question7, game_question8])
 
 def draw_shapes():
-    pygame.draw.rect(DISPLAYSURF, WHITE, (0, 0, 800, 300))
+    pygame.draw.rect(DISPLAYSURF, WHITE, (0, 15, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
     pygame.draw.rect(DISPLAYSURF, RED, (400, 300, 400, 150))
     pygame.draw.rect(DISPLAYSURF, YELLOW, (0, 450, 400, 150))
@@ -169,6 +172,9 @@ def assign_color(click):
             return 2
         else:
             return 4
+    else:
+        return 0
+
 
 click = (-1, -1)
 color = False
@@ -176,6 +182,9 @@ total_score = 0
 load_images()
 call_questions()
 category = games
+frametime = 0
+DISPLAYSURF.fill(UGLY)
+answered = False
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -186,10 +195,25 @@ while True:
             color = assign_color(click)
             answered = True
 
-    old_score = total_score
-    total_score += ask_question(color, category)
-    if total_score > old_score:
+    score = ask_question(color, category, frametime)
+    total_score += score
+    frametime += 1
+    if score > 0 and answered:
         category.new_question()
+        DISPLAYSURF.fill(UGLY)
+        frametime = 0
+        print ("CORRECT")
+        answered = False
+    elif score < 0:
+        total_score += 1
+    elif score == 0 and answered:
+        category.new_question()
+        DISPLAYSURF.fill(UGLY)
+        frametime = 0
+        print ("INCORRECT")
+        answered = False
+
+#add fps, sort out the answers, add correct/incorrect screens, score display, and category choosing
 
     draw_shapes()
     category.display_text(DISPLAYSURF)
