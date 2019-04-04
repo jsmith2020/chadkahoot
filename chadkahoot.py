@@ -5,23 +5,6 @@ from category import Category
 
 pygame.init()
 
-DISPLAYSURF = pygame.display.set_mode((800, 600))
-pygame.display.set_caption("KAHOOT")
-
-pygame.mixer.music.load('kahootmusic.mp3')
-pygame.mixer.music.play(-1, 0.0)
-
-FPS = 50
-fpsClock = pygame.time.Clock()
-
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-UGLY = (250, 0, 150)
-
 def load_images():
     global karen_image
     karen_image = pygame.image.load('images/kid-suitcase.jpg')
@@ -160,6 +143,11 @@ def draw_shapes():
     pygame.draw.line(DISPLAYSURF, BLACK, (0, 600), (800, 600), 5)
     pygame.draw.line(DISPLAYSURF, BLACK, (800, 0), (800, 600), 5)
     pygame.draw.line(DISPLAYSURF, BLACK, (0, 300), (800, 300), 5)
+    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 16)
+    Surf = BASICFONT.render(str(total_score), 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (760, 20)
+    DISPLAYSURF.blit(Surf, Rect)
 
 def assign_color(click):
     if click[0] < 401 and click[1] > 300:
@@ -175,16 +163,73 @@ def assign_color(click):
     else:
         return 0
 
+def correct_answer():
+    DISPLAYSURF.fill(GREEN)
+    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 50)
+    Surf = BASICFONT.render("CORRECT!", 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (300, 200)
+    DISPLAYSURF.blit(Surf, Rect)
+    pygame.display.update()
+    time.sleep(2)
+    DISPLAYSURF.fill(UGLY)
 
-click = (-1, -1)
-color = False
-total_score = 0
-load_images()
-call_questions()
-category = games
-frametime = 0
-DISPLAYSURF.fill(UGLY)
-answered = False
+def incorrect_answer():
+    DISPLAYSURF.fill(RED)
+    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 50)
+    Surf = BASICFONT.render("INCORRECT!", 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (300, 200)
+    DISPLAYSURF.blit(Surf, Rect)
+    pygame.display.update()
+    time.sleep(2)
+    DISPLAYSURF.fill(UGLY)
+
+def make_variables():
+    global DISPLAYSURF
+    DISPLAYSURF = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("KAHOOT")
+
+    pygame.mixer.music.load('kahootmusic.mp3')
+    pygame.mixer.music.play(-1, 0.0)
+
+    global RED
+    RED = (255, 0, 0)
+    global GREEN
+    GREEN = (0, 255, 0)
+    global BLUE
+    BLUE = (0, 0, 255)
+    global YELLOW
+    YELLOW = (255, 255, 0)
+    global BLACK
+    BLACK = (0, 0, 0)
+    global WHITE
+    WHITE = (255, 255, 255)
+    global UGLY
+    UGLY = (250, 0, 150)
+
+    global click
+    click = (-1, -1)
+    global color
+    color = False
+    global total_score
+    total_score = 0
+    load_images()
+    call_questions()
+    global category
+    category = games
+    global frametime
+    frametime = 0
+    DISPLAYSURF.fill(UGLY)
+    global answered
+    answered = False
+    global FPS
+    FPS = 60
+    global fpsClock
+    fpsClock = pygame.time.Clock()
+
+make_variables()
+
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -204,6 +249,8 @@ while True:
         frametime = 0
         print ("CORRECT")
         answered = False
+        color = -1
+        correct_answer()
     elif score < 0:
         total_score += 1
     elif score == 0 and answered:
@@ -212,9 +259,10 @@ while True:
         frametime = 0
         print ("INCORRECT")
         answered = False
-
-#add fps, sort out the answers, add correct/incorrect screens, score display, and category choosing
+        color = -1
+        incorrect_answer()
 
     draw_shapes()
     category.display_text(DISPLAYSURF)
+    fpsClock.tick(FPS)
     pygame.display.update()
