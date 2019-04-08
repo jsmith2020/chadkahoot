@@ -125,10 +125,12 @@ def call_questions():
     global memes
     global history
     global games
+    global categories
     sports = Category([sport_question1, sport_question2, sport_question3, sport_question4, sport_question5, sport_question6, sport_question7, sport_question8])
     memes = Category([meme_question1, meme_question2, meme_question3, meme_question4, meme_question5, meme_question6, meme_question7, meme_question8])
     history = Category([history_question1, history_question2, history_question3, history_question4, history_question5, history_question6, history_question7, history_question8])
     games = Category([game_question1, game_question2, game_question3, game_question4, game_question5, game_question6, game_question7, game_question8])
+    categories = [sports, memes, history, games]
 
 def draw_shapes():
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 15, 800, 300))
@@ -217,7 +219,7 @@ def make_variables():
     load_images()
     call_questions()
     global category
-    category = games
+    category = categories[random.randint(0, 3)]
     global frametime
     frametime = 0
     DISPLAYSURF.fill(UGLY)
@@ -247,20 +249,20 @@ while True:
         category.new_question()
         DISPLAYSURF.fill(UGLY)
         frametime = 0
-        print ("CORRECT")
         answered = False
         color = -1
         correct_answer()
+        category = categories[random.randint(0, 3)]
     elif score < 0:
         total_score += 1
     elif score == 0 and answered:
         category.new_question()
         DISPLAYSURF.fill(UGLY)
         frametime = 0
-        print ("INCORRECT")
         answered = False
         color = -1
         incorrect_answer()
+        category = categories[random.randint(0, 3)]
 
     draw_shapes()
     category.display_text(DISPLAYSURF)
