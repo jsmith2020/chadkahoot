@@ -190,7 +190,7 @@ def make_variables():
     DISPLAYSURF = pygame.display.set_mode((800, 600))
     pygame.display.set_caption("KAHOOT")
 
-    pygame.mixer.music.load('kahootmusic.mp3')
+    pygame.mixer.music.load('kahootremix.mp3')
     pygame.mixer.music.play(-1, 0.0)
 
     global RED
