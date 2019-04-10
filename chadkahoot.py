@@ -133,6 +133,7 @@ def call_questions():
     categories = [sports, memes, history, games]
 
 def draw_shapes():
+    DISPLAYSURF.fill(UGLY)
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 15, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
     pygame.draw.rect(DISPLAYSURF, RED, (400, 300, 400, 150))
@@ -145,10 +146,9 @@ def draw_shapes():
     pygame.draw.line(DISPLAYSURF, BLACK, (0, 600), (800, 600), 5)
     pygame.draw.line(DISPLAYSURF, BLACK, (800, 0), (800, 600), 5)
     pygame.draw.line(DISPLAYSURF, BLACK, (0, 300), (800, 300), 5)
-    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 16)
     Surf = BASICFONT.render(str(total_score), 1, (0,0,0))
     Rect = Surf.get_rect()
-    Rect.topleft = (760, 20)
+    Rect.topleft = (740, 20)
     DISPLAYSURF.blit(Surf, Rect)
 
 def assign_color(click):
@@ -167,8 +167,8 @@ def assign_color(click):
 
 def correct_answer():
     DISPLAYSURF.fill(GREEN)
-    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 50)
-    Surf = BASICFONT.render("CORRECT!", 1, (0,0,0))
+    FONT = pygame.font.Font('Roboto-Black.ttf', 50)
+    Surf = FONT.render("CORRECT!", 1, (0,0,0))
     Rect = Surf.get_rect()
     Rect.topleft = (300, 200)
     DISPLAYSURF.blit(Surf, Rect)
@@ -176,16 +176,30 @@ def correct_answer():
     time.sleep(2)
     DISPLAYSURF.fill(UGLY)
 
+    global frametime
+    global answered
+    global color
+    frametime = 0
+    answered = False
+    color = -1
+
 def incorrect_answer():
     DISPLAYSURF.fill(RED)
-    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 50)
-    Surf = BASICFONT.render("INCORRECT!", 1, (0,0,0))
+    FONT = pygame.font.Font('Roboto-Black.ttf', 50)
+    Surf = FONT.render("INCORRECT!", 1, (0,0,0))
     Rect = Surf.get_rect()
     Rect.topleft = (300, 200)
     DISPLAYSURF.blit(Surf, Rect)
     pygame.display.update()
     time.sleep(2)
     DISPLAYSURF.fill(UGLY)
+
+    global frametime
+    global answered
+    global color
+    frametime = 0
+    answered = False
+    color = -1
 
 def make_variables():
     global DISPLAYSURF
@@ -194,6 +208,9 @@ def make_variables():
 
     pygame.mixer.music.load('kahootremix.mp3')
     pygame.mixer.music.play(-1, 0.0)
+
+    global BASICFONT
+    BASICFONT = pygame.font.Font('Roboto-Black.ttf', 16)
 
     global RED
     RED = (255, 0, 0)
@@ -229,6 +246,16 @@ def make_variables():
     FPS = 60
     global fpsClock
     fpsClock = pygame.time.Clock()
+    global question_count
+    question_count = 1
+
+def finished():
+    DISPLAYSURF.fill(WHITE)
+    FONT = pygame.font.Font('Roboto-Black.ttf', 50)
+    Surf = FONT.render(str(total_score), 1, (0, 0, 0))
+    Rect = Surf.get_rect()
+    Rect = (300, 200)
+    DISPLAYSURF.blit(Surf, Rect)
 
 make_variables()
 
@@ -242,29 +269,34 @@ while True:
             color = assign_color(click)
             answered = True
 
-    score = ask_question(color, category, frametime)
-    total_score += score
-    frametime += 1
-    if score > 0 and answered:
-        category.new_question()
-        DISPLAYSURF.fill(UGLY)
-        frametime = 0
-        answered = False
-        color = -1
-        correct_answer()
-        category = categories[random.randint(0, 3)]
-    elif score < 0:
-        total_score += 1
-    elif score == 0 and answered:
-        category.new_question()
-        DISPLAYSURF.fill(UGLY)
-        frametime = 0
-        answered = False
-        color = -1
-        incorrect_answer()
-        category = categories[random.randint(0, 3)]
+    for cat in categories:
+        if len(cat.questions) == 0:
+            categories.remove(cat)
 
-    draw_shapes()
-    category.display_text(DISPLAYSURF)
+    if question_count < 32:
+        score = ask_question(color, category, frametime)
+        total_score += score
+        frametime += 1
+        if score > 0 and answered:
+            correct_answer()
+            category.new_question()
+            question_count += 1
+            category = categories[random.randint(0, len(categories) - 1)]
+        elif score < 0:
+            total_score += 1
+        elif score == 0 and answered:
+            incorrect_answer()
+            category.new_question()
+            question_count += 1
+            category = categories[random.randint(0, len(categories) - 1)]
+
+        draw_shapes()
+        category.display_text(DISPLAYSURF)
+
+    else:
+        finished()
+
     fpsClock.tick(FPS)
     pygame.display.update()
+
+#make more efficient, add ending, add comments

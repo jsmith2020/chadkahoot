@@ -34,11 +34,12 @@ class Category:
 
 
     def check_answer(self, click):
+        self.questions.remove(self.question)
         if self.question.answers[click - 1] == self.question.correct:
             return True
         else:
             return False
 
     def new_question(self):
-        self.questions.remove(self.question)
-        self.question = self.questions[random.randint(0, len(self.questions) - 1)]
+        if len(self.questions) > 0:
+            self.question = self.questions[random.randint(0, len(self.questions) - 1)]
