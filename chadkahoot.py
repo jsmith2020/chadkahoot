@@ -4,7 +4,7 @@ from question import Question
 from category import Category
 
 pygame.init()
-
+#Contains the Images for Each Question and Makes them into Global Variables
 def load_images():
     global karen_image
     karen_image = pygame.image.load('images/kid-suitcase.jpg')
@@ -68,10 +68,13 @@ def load_images():
     world_cup_image = pygame.image.load('images/world_cup.jpg')
     global atomic_image
     atomic_image = pygame.image.load('images/atomic_bomb.jpg')
-
+#Checks the Answer to make sure its correct or incorrect and loads the progress bar
 def ask_question(color, category, frametime):
+    #Runs while the Game is still within the time limit
     if frametime <= 1000:
+        #creates the progress bar
         pygame.draw.line(DISPLAYSURF, WHITE, (1000, 0), (1000 - frametime, 0), 30)
+        #Checks answer based upon the color
         if color > 0:
             if category.check_answer(color):
                 return 1000 - frametime
@@ -83,8 +86,9 @@ def ask_question(color, category, frametime):
         global answered
         answered = True
         return 0
-
+#Contains the Question classes with corresponding image variables
 def call_questions():
+    #Creates the gaming related question classes; the first answer in the list is the correct one. It also lists the image corresponding to each question.
     game_question1 = Question(["Epic Games", "Ubisoft", "Mojang", "Supercell"], "What studio created Fortnite?", fortnite_image)
     game_question2 = Question(["Wailord", "Pikachu", "Charzard", "Calvin"], "Who is the biggest Pokemon?", pokemon_image)
     game_question3 = Question(["Infinite Warfare", "Fallout 76", "Sim City 2013", "Casey Powell Lacrosse 16"], "What video game trailer received the most amounts of dislikes on YouTube?", dislike_image)
@@ -93,7 +97,7 @@ def call_questions():
     game_question6 = Question(["2013", "2012", "2015", "2014"], "When was GTA V released?", gtav_image)
     game_question7 = Question(["2013", "2011", "2012", "2014"], "When was FIFA 14 released?", fifa_image)
     game_question8 = Question(["2012", "2013", "2011", "2014"], "When was CS:GO released?", csgo_image)
-
+    #Creates WW2 related question classes; the first answer in the list is the correct one. It also lists the image corresponding to each question.
     history_question1 = Question(["1933", "1929", "1941", "1935"], "When did Hitler take power?", hitler_image)
     history_question2 = Question(["Mussolini", "SpaghettMan", "King Alfonso X", "The Pope"], "Who was the leader of Italy during WW2", mussolini_image)
     history_question3 = Question(["1939", "1940", "1938", "1941"], "In what year did WW2 start?", WWII_image)
@@ -102,7 +106,7 @@ def call_questions():
     history_question6 = Question(["Nagasaki & Hiroshima", "Tokyo and Okinawa", "Iwo Jima and Hiroshima", "Osaka and Nagasaki"], "In what Japanese cities were the first atomic bombs dropped?", atomic_image)
     history_question7 = Question(["Battle of the Atlantic", "Battle of the Bulge", "Battle of France", "The Battle of the Bagel"], "What was the longest battle of WW2?", battle_of_atlantic_image)
     history_question8 = Question(["Dachau", "Danzig", "Auschwitz", "Lodz"], "What was the first Nazi concentration camp?", dachau_image)
-
+    #Creates Meme related question classes; the first answer in the list is the correct one. It also lists the image corresponding to each question.
     meme_question1 = Question(["Karen", "The Zucc", "Big Chungus", "Koen"], "Who took the kids?", karen_image)
     meme_question2 = Question(["ninja", "guy fieri", "jeff bezos", "mario"], "What internet personality died of Ligma?", ligma_image)
     meme_question3 = Question(["The Zucc Bot", "Thomas", "Johnny-Johnny", "Patrick Star", "Kazoo Kid"], "What internet personality is a lizard?", lizard_image)
@@ -111,7 +115,7 @@ def call_questions():
     meme_question6 = Question(["Harambe", "Gekyume", "Jah", "Thanos"], "Who forever lives in our hearts?", harambe_image)
     meme_question7 = Question(["Ali-A", "Pewdiepie", "Thomas Hudson", "Mr. Kantaros"], "Who has a intro that will make your eardrums bleed?", ali_a_image)
     meme_question8 = Question(["Sugar", "Pancakes", "Brown Sugar", "Bread"], "What is Johnny-Johnny Eating?", johnny_image)
-
+    #Creates Sports related question classes; the first answer in the list is the correct one. It also lists the image corresponding to each question.
     sport_question1 = Question(["Yankees-27", "Twins-13", "Mets-15", "Astros-4"], "What baseball team has the most world series wins?", world_series_image)
     sport_question2 = Question(["American Pharo", "Zues", "Thomas Hudson", "African King"], "What was the last horse to win a triple crown?", horse_image)
     sport_question3 = Question(["David Robinson", "Michael Jordan", "John Stockton", "Jebron James"], "What NBA player was names 'the admiral'", admiral_image)
@@ -120,7 +124,7 @@ def call_questions():
     sport_question6 = Question(["Jai alai", "Ping Pong", "Cricket", "Baseball"], "What sport is this?", jai_alai_image)
     sport_question7 = Question(["Brazil", "Argentina", "Spain", "Portugal"], "What is the only country to play in every world cup?", world_cup_image)
     sport_question8 = Question(["Karren Abdul-Jabar", "Michael Jordan", "Kobe Bryant", "Lebron James"], "Who is the all-time leading scorer in the NBA?", NBA_2K_image)
-
+    #Turns all the categories into global variables and creates the category lists
     global sports
     global memes
     global history
@@ -133,7 +137,11 @@ def call_questions():
     categories = [sports, memes, history, games]
 
 def draw_shapes():
+<<<<<<< HEAD
     DISPLAYSURF.fill(UGLY)
+=======
+    #Creates the game screen by drawing each corner of the screen in a different color, and seperating each color by a black line. It also creates the font to be used for the game and renders the score in the corner of the screen.
+>>>>>>> 92ffd3066f0af1bb263dad3ac7cb61bd7de1fdb3
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 15, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
     pygame.draw.rect(DISPLAYSURF, RED, (400, 300, 400, 150))
@@ -150,7 +158,7 @@ def draw_shapes():
     Rect = Surf.get_rect()
     Rect.topleft = (740, 20)
     DISPLAYSURF.blit(Surf, Rect)
-
+#As
 def assign_color(click):
     if click[0] < 401 and click[1] > 300:
         if click[1] < 451:
@@ -164,7 +172,7 @@ def assign_color(click):
             return 4
     else:
         return 0
-
+#Displays the Correct Screen that fills the screen with green and prints correct
 def correct_answer():
     DISPLAYSURF.fill(GREEN)
     FONT = pygame.font.Font('Roboto-Black.ttf', 50)
@@ -175,6 +183,7 @@ def correct_answer():
     pygame.display.update()
     time.sleep(2)
     DISPLAYSURF.fill(UGLY)
+<<<<<<< HEAD
 
     global frametime
     global answered
@@ -183,6 +192,9 @@ def correct_answer():
     answered = False
     color = -1
 
+=======
+#Displays the Incorrect Screen which fills the screen with red and prints incorrect
+>>>>>>> 92ffd3066f0af1bb263dad3ac7cb61bd7de1fdb3
 def incorrect_answer():
     DISPLAYSURF.fill(RED)
     FONT = pygame.font.Font('Roboto-Black.ttf', 50)
@@ -193,6 +205,7 @@ def incorrect_answer():
     pygame.display.update()
     time.sleep(2)
     DISPLAYSURF.fill(UGLY)
+<<<<<<< HEAD
 
     global frametime
     global answered
@@ -201,6 +214,9 @@ def incorrect_answer():
     answered = False
     color = -1
 
+=======
+#Creates the game window, titles it, and begins to play the background music. It also creates most of the global variables including those relating to colors, the score, and FPS.
+>>>>>>> 92ffd3066f0af1bb263dad3ac7cb61bd7de1fdb3
 def make_variables():
     global DISPLAYSURF
     DISPLAYSURF = pygame.display.set_mode((800, 600))
@@ -258,7 +274,7 @@ def finished():
     DISPLAYSURF.blit(Surf, Rect)
 
 make_variables()
-
+#The Game Loop; contains and calls all the functions over the course of the game.
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
