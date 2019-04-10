@@ -3,11 +3,11 @@ import pygame, sys, time, random
 from pygame.locals import *
 
 class Category:
-
+#Selects a question from the list contained in the category
     def __init__(self, questions):
         self.questions = questions
         self.question = self.questions[random.randint(0, len(self.questions) - 1)]
-
+#Displays all the text on the screen, including the question, the four potential answers, and the image associated with each question.
     def display_text(self, DISPLAYSURF):
         BASICFONT = pygame.font.Font('Roboto-Black.ttf', 16)
         Surf = BASICFONT.render(self.question.question_text, 1, (0,0,0))
@@ -31,8 +31,7 @@ class Category:
         Rect.topleft = (450, 525)
         DISPLAYSURF.blit(Surf, Rect)
         DISPLAYSURF.blit(self.question.image, (100, 45))
-
-
+#
     def check_answer(self, click):
         self.questions.remove(self.question)
         if self.question.answers[click - 1] == self.question.correct:
