@@ -4,7 +4,7 @@ from question import Question
 from category import Category
 
 pygame.init()
-#Contains the Images for Each Question and Makes them into Global Variables
+#Contains the images for each question and makes them into global variables
 def load_images():
     global karen_image
     karen_image = pygame.image.load('images/kid-suitcase.jpg')
@@ -68,6 +68,7 @@ def load_images():
     world_cup_image = pygame.image.load('images/world_cup.jpg')
     global atomic_image
     atomic_image = pygame.image.load('images/atomic_bomb.jpg')
+
 #Checks the Answer to make sure its correct or incorrect and loads the progress bar
 def ask_question(color, category, frametime):
     #Runs while the Game is still within the time limit
@@ -77,15 +78,20 @@ def ask_question(color, category, frametime):
         #Checks answer based upon the color
         if color > 0:
             if category.check_answer(color):
+                #returns the score if correct
                 return 1000 - frametime
             else:
+                #return 0 if wrong
                 return 0
+        #return special number if they click outside the options
         else:
             return -1
     else:
+        #return 0 if they don't answer
         global answered
         answered = True
         return 0
+
 #Contains the Question classes with corresponding image variables
 def call_questions():
     #Creates the gaming related question classes; the first answer in the list is the correct one. It also lists the image corresponding to each question.
@@ -134,14 +140,10 @@ def call_questions():
     memes = Category([meme_question1, meme_question2, meme_question3, meme_question4, meme_question5, meme_question6, meme_question7, meme_question8])
     history = Category([history_question1, history_question2, history_question3, history_question4, history_question5, history_question6, history_question7, history_question8])
     games = Category([game_question1, game_question2, game_question3, game_question4, game_question5, game_question6, game_question7, game_question8])
-    categories = [sports, memes, history, games]
+    categories = [memes, games, sports, history]
 
+#Creates the game screen by drawing each corner of the screen in a different color, and seperating each color by a black line. It also creates the font to be used for the game and renders the score in the corner of the screen.
 def draw_shapes():
-<<<<<<< HEAD
-    DISPLAYSURF.fill(UGLY)
-=======
-    #Creates the game screen by drawing each corner of the screen in a different color, and seperating each color by a black line. It also creates the font to be used for the game and renders the score in the corner of the screen.
->>>>>>> 92ffd3066f0af1bb263dad3ac7cb61bd7de1fdb3
     pygame.draw.rect(DISPLAYSURF, WHITE, (0, 15, 800, 300))
     pygame.draw.rect(DISPLAYSURF, GREEN, (0, 300, 400, 150))
     pygame.draw.rect(DISPLAYSURF, RED, (400, 300, 400, 150))
@@ -158,7 +160,8 @@ def draw_shapes():
     Rect = Surf.get_rect()
     Rect.topleft = (740, 20)
     DISPLAYSURF.blit(Surf, Rect)
-#As
+
+#Takes in the coordinates of the player's clikc and assigns a number to it
 def assign_color(click):
     if click[0] < 401 and click[1] > 300:
         if click[1] < 451:
@@ -172,7 +175,8 @@ def assign_color(click):
             return 4
     else:
         return 0
-#Displays the Correct Screen that fills the screen with green and prints correct
+
+#Displays the Correct Screen that fills the screen with green and prints correct, then does some variable changing to prepare for the next question
 def correct_answer():
     DISPLAYSURF.fill(GREEN)
     FONT = pygame.font.Font('Roboto-Black.ttf', 50)
@@ -183,7 +187,6 @@ def correct_answer():
     pygame.display.update()
     time.sleep(2)
     DISPLAYSURF.fill(UGLY)
-<<<<<<< HEAD
 
     global frametime
     global answered
@@ -192,9 +195,7 @@ def correct_answer():
     answered = False
     color = -1
 
-=======
-#Displays the Incorrect Screen which fills the screen with red and prints incorrect
->>>>>>> 92ffd3066f0af1bb263dad3ac7cb61bd7de1fdb3
+#Displays the Incorrect Screen which fills the screen with red and prints incorrect, then does some variable changing to prepare for the next question
 def incorrect_answer():
     DISPLAYSURF.fill(RED)
     FONT = pygame.font.Font('Roboto-Black.ttf', 50)
@@ -205,7 +206,6 @@ def incorrect_answer():
     pygame.display.update()
     time.sleep(2)
     DISPLAYSURF.fill(UGLY)
-<<<<<<< HEAD
 
     global frametime
     global answered
@@ -214,9 +214,7 @@ def incorrect_answer():
     answered = False
     color = -1
 
-=======
 #Creates the game window, titles it, and begins to play the background music. It also creates most of the global variables including those relating to colors, the score, and FPS.
->>>>>>> 92ffd3066f0af1bb263dad3ac7cb61bd7de1fdb3
 def make_variables():
     global DISPLAYSURF
     DISPLAYSURF = pygame.display.set_mode((800, 600))
@@ -263,8 +261,9 @@ def make_variables():
     global fpsClock
     fpsClock = pygame.time.Clock()
     global question_count
-    question_count = 1
+    question_count = 0
 
+#displays the final score for the player
 def finished():
     DISPLAYSURF.fill(WHITE)
     FONT = pygame.font.Font('Roboto-Black.ttf', 50)
@@ -272,24 +271,53 @@ def finished():
     Rect = Surf.get_rect()
     Rect = (300, 200)
     DISPLAYSURF.blit(Surf, Rect)
+    pygame.display.update()
+    time.sleep(2)
+
+#allows user to choose their category
+def choose_category(c):
+
+    draw_shapes()
+    Surf = BASICFONT.render("Memes", 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (100, 375)
+    DISPLAYSURF.blit(Surf, Rect)
+    Surf = BASICFONT.render("Games", 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (450, 375)
+    DISPLAYSURF.blit(Surf, Rect)
+    Surf = BASICFONT.render("Sports", 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (100, 525)
+    DISPLAYSURF.blit(Surf, Rect)
+    Surf = BASICFONT.render("WWII", 1, (0,0,0))
+    Rect = Surf.get_rect()
+    Rect.topleft = (450, 525)
+    DISPLAYSURF.blit(Surf, Rect)
+    pygame.display.update()
+
+    global category
+    global question_count
+    if c > 0:
+        category = categories[c - 1]
+        question_count += 1
 
 make_variables()
+
 #The Game Loop; contains and calls all the functions over the course of the game.
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        #allows the player to click their answer
         if event.type == MOUSEBUTTONDOWN:
             click = pygame.mouse.get_pos()
             color = assign_color(click)
             answered = True
 
-    for cat in categories:
-        if len(cat.questions) == 0:
-            categories.remove(cat)
-
-    if question_count < 32:
+    #before all questions have been asked, a new question is asked, the score is added, and the answer is assessed. runs the appropriate function
+    if question_count % 9 != 0:
         score = ask_question(color, category, frametime)
         total_score += score
         frametime += 1
@@ -297,22 +325,27 @@ while True:
             correct_answer()
             category.new_question()
             question_count += 1
-            category = categories[random.randint(0, len(categories) - 1)]
         elif score < 0:
             total_score += 1
         elif score == 0 and answered:
             incorrect_answer()
             category.new_question()
             question_count += 1
-            category = categories[random.randint(0, len(categories) - 1)]
 
+        #draws answers, questions, pictures, and their frames
         draw_shapes()
         category.display_text(DISPLAYSURF)
 
-    else:
+    #if they finish the category, shows final score, and resets for next category
+    elif question_count == 9:
         finished()
+        question_count = 0
+        total_score = 0
+
+    #choose a new category
+    elif question_count == 0:
+        choose_category(color)
+        color = 0
 
     fpsClock.tick(FPS)
     pygame.display.update()
-
-#make more efficient, add ending, add comments
