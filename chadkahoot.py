@@ -4,6 +4,7 @@ from question import Question
 from category import Category
 
 pygame.init()
+
 #Contains the images for each question and makes them into global variables
 def load_images():
     global karen_image
@@ -193,7 +194,7 @@ def correct_answer():
     global color
     frametime = 0
     answered = False
-    color = -1
+    color = 0
 
 #Displays the Incorrect Screen which fills the screen with red and prints incorrect, then does some variable changing to prepare for the next question
 def incorrect_answer():
@@ -212,7 +213,7 @@ def incorrect_answer():
     global color
     frametime = 0
     answered = False
-    color = -1
+    color = 0
 
 #Creates the game window, titles it, and begins to play the background music. It also creates most of the global variables including those relating to colors, the score, and FPS.
 def make_variables():
@@ -273,6 +274,9 @@ def finished():
     DISPLAYSURF.blit(Surf, Rect)
     pygame.display.update()
     time.sleep(2)
+
+    global color
+    color = 0
 
 #allows user to choose their category
 def choose_category(c):
@@ -339,6 +343,7 @@ while True:
     #if they finish the category, shows final score, and resets for next category
     elif question_count == 9:
         finished()
+        DISPLAYSURF.fill(UGLY)
         question_count = 0
         total_score = 0
 
