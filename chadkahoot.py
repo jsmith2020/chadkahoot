@@ -162,7 +162,7 @@ def draw_shapes():
     Rect.topleft = (740, 20)
     DISPLAYSURF.blit(Surf, Rect)
 
-#Takes in the coordinates of the player's clikc and assigns a number to it
+#Takes in the coordinates of the player's click and assigns a number to it
 def assign_color(click):
     if click[0] < 401 and click[1] > 300:
         if click[1] < 451:
@@ -278,9 +278,10 @@ def finished():
     global color
     color = 0
 
-#allows user to choose their category
+#allows user to choose their category by changing display and assessing the player's click
 def choose_category(c):
 
+    DISPLAYSURF.fill(WHITE)
     draw_shapes()
     Surf = BASICFONT.render("Memes", 1, (0,0,0))
     Rect = Surf.get_rect()
